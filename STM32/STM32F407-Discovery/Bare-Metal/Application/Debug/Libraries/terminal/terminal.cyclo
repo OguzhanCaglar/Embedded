@@ -1,4 +1,5 @@
-../Libraries/terminal/terminal.c:24:6:fProcessCommand	3
-../Libraries/terminal/terminal.c:37:6:fPrintHelpMessage	1
-../Libraries/terminal/terminal.c:42:6:fPrintUnknownMessage	1
-../Libraries/terminal/terminal.c:47:6:fHandleLed	9
+../Libraries/terminal/terminal.c:25:6:fProcessCommand	4
+../Libraries/terminal/terminal.c:46:6:fPrintHelpMessage	2
+../Libraries/terminal/terminal.c:57:6:fPrintUnknownMessage	1
+../Libraries/terminal/terminal.c:62:6:fResetSystem	1
+../Libraries/terminal/terminal.c:67:6:fHandleLed	9

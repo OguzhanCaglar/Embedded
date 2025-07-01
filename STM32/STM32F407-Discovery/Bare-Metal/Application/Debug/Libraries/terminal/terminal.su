@@ -1,4 +1,5 @@
-../Libraries/terminal/terminal.c:24:6:fProcessCommand	24	static
-../Libraries/terminal/terminal.c:37:6:fPrintHelpMessage	16	static
-../Libraries/terminal/terminal.c:42:6:fPrintUnknownMessage	16	static
-../Libraries/terminal/terminal.c:47:6:fHandleLed	8	static
+../Libraries/terminal/terminal.c:25:6:fProcessCommand	24	static
+../Libraries/terminal/terminal.c:46:6:fPrintHelpMessage	144	static
+../Libraries/terminal/terminal.c:57:6:fPrintUnknownMessage	16	static
+../Libraries/terminal/terminal.c:62:6:fResetSystem	8	static
+../Libraries/terminal/terminal.c:67:6:fHandleLed	8	static

@@ -1,28 +1,31 @@
 #include "terminal.h"
 
 char sUartReceiveMessage[mUartRxBufferSize];
-const char* sEntryMessage = "Welcome to Discovery Board!\n===== Supported Commands =====\n- help\n- Led <PIN> ON/OFF\n$ ";
-const char* sHelpMessage = "\n====== USAGE ======\n- help\n- Led <PIN> ON/OFF\n===================";
+
+const char* sEntryMessage = "Welcome to Discovery Board!\n$ ";
+
 const char* sUnknownCommandMessage = "Unknown command!";
 
 const sCommand CommandTable[mCommandsNumber] =
 {
-	{ "help", 		eCommandHelp, 			fPrintHelpMessage},
-	{ "led 1 on", 	eCommandGreenLedOn, 	fHandleLed},
-	{ "led 1 off", 	eCommandGreenLedOff, 	fHandleLed},
-	{ "led 2 on", 	eCommandOrangeLedOn, 	fHandleLed},
-	{ "led 2 off", 	eCommandOrangeLedOff, 	fHandleLed},
-	{ "led 3 on", 	eCommandRedLedOn, 		fHandleLed},
-	{ "led 3 off", 	eCommandRedLedOff, 		fHandleLed},
-	{ "led 4 on", 	eCommandBlueLedOn, 		fHandleLed},
-	{ "led 4 off", 	eCommandBlueLedOff, 	fHandleLed},
-	{ "",			eCommandUnknown,		fPrintUnknownMessage}
+	{ "help", 		eCommandHelp, 			fPrintHelpMessage, 	"Print Help Message"},
+	{ "led 1 on", 	eCommandGreenLedOn, 	fHandleLed, 		"Turn on the green led"},
+	{ "led 1 off", 	eCommandGreenLedOff, 	fHandleLed, 		"Turn off the green led"},
+	{ "led 2 on", 	eCommandOrangeLedOn, 	fHandleLed, 		"Turn on the orange led"},
+	{ "led 2 off", 	eCommandOrangeLedOff, 	fHandleLed, 		"Turn off the orange led"},
+	{ "led 3 on", 	eCommandRedLedOn, 		fHandleLed, 		"Turn on the red led"},
+	{ "led 3 off", 	eCommandRedLedOff, 		fHandleLed, 		"Turn off the red led"},
+	{ "led 4 on", 	eCommandBlueLedOn, 		fHandleLed, 		"Turn on the blue led"},
+	{ "led 4 off", 	eCommandBlueLedOff, 	fHandleLed, 		"Turn off the blue led"},
+	{ "reset", 		eCommandReset, 			fResetSystem, 		"Resets the system"},
 };
 
 uint8_t currentCommand;
 
 void fProcessCommand(char command[])
 {
+	currentCommand = eCommandStart;
+
 	for(int i = 0; i < mCommandsNumber; i++)
 	{
 		if(strcmp(command, CommandTable[i].commandName) == 0)
@@ -32,16 +35,33 @@ void fProcessCommand(char command[])
 			break;
 		}
 	}
+
+	if(currentCommand == eCommandStart)
+	{
+		currentCommand = eCommandUnknown;
+		fPrintUnknownMessage();
+	}
 }
 
 void fPrintHelpMessage(void)
 {
-	HAL_UART_Transmit(&huart4, (uint8_t *)sHelpMessage, strlen(sHelpMessage), HAL_MAX_DELAY);
+	char buffer[128];
+
+	for(int i = 0; i < mCommandsNumber; i++)
+	{
+		sprintf(buffer, "%-10s : %s\r\n", CommandTable[i].commandName, CommandTable[i].commandInfo);
+		HAL_UART_Transmit(&huart4, (uint8_t *)buffer, strlen(buffer), HAL_MAX_DELAY);
+	}
 }
 
 void fPrintUnknownMessage(void)
 {
 	HAL_UART_Transmit(&huart4, (uint8_t *)sUnknownCommandMessage, strlen(sUnknownCommandMessage), HAL_MAX_DELAY);
+}
+
+void fResetSystem(void)
+{
+	HAL_NVIC_SystemReset();
 }
 
 void fHandleLed(void)

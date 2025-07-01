@@ -23,6 +23,7 @@ void fProcessCommand(char command[]);
 void fPrintHelpMessage(void);
 void fPrintUnknownMessage(void);
 void fHandleLed(void);
+void fResetSystem(void);
 
 typedef enum{
 	eCommandStart,
@@ -36,7 +37,7 @@ typedef enum{
 	eCommandRedLedOff,
 	eCommandBlueLedOn,
 	eCommandBlueLedOff,
-
+	eCommandReset,
 
 	eCommandUnknown,
 	eCommandEnd
@@ -46,12 +47,12 @@ typedef struct {
 	const char* commandName;
 	eCommands command;
 	void (*command_function)(void);
+	const char* commandInfo;
 }sCommand;
 
 extern const sCommand CommandTable[mCommandsNumber];
 extern char sUartReceiveMessage[mUartRxBufferSize];
 extern const char* sEntryMessage;
-extern const char* sHelpMessage;
 extern uint8_t cUartReceive;
 extern uint8_t iRxIndex;
 extern UART_HandleTypeDef huart4;
