@@ -1,0 +1,1 @@
+Bu proje discovery kartı ile ilgili bare metal proje çalışmasını içerir. 
