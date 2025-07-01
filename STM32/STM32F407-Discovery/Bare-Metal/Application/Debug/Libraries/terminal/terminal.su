@@ -1,0 +1,4 @@
+../Libraries/terminal/terminal.c:24:6:fProcessCommand	24	static
+../Libraries/terminal/terminal.c:37:6:fPrintHelpMessage	16	static
+../Libraries/terminal/terminal.c:42:6:fPrintUnknownMessage	16	static
+../Libraries/terminal/terminal.c:47:6:fHandleLed	8	static
