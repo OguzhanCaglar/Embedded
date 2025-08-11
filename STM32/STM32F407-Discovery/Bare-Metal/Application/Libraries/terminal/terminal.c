@@ -50,13 +50,13 @@ void fPrintHelpMessage(void)
 	for(int i = 0; i < mCommandsNumber; i++)
 	{
 		sprintf(buffer, "%-10s : %s\r\n", CommandTable[i].commandName, CommandTable[i].commandInfo);
-		HAL_UART_Transmit(&huart4, (uint8_t *)buffer, strlen(buffer), HAL_MAX_DELAY);
+		HAL_UART_Transmit(&huart5, (uint8_t *)buffer, strlen(buffer), HAL_MAX_DELAY);
 	}
 }
 
 void fPrintUnknownMessage(void)
 {
-	HAL_UART_Transmit(&huart4, (uint8_t *)sUnknownCommandMessage, strlen(sUnknownCommandMessage), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&huart5, (uint8_t *)sUnknownCommandMessage, strlen(sUnknownCommandMessage), HAL_MAX_DELAY);
 }
 
 void fResetSystem(void)

@@ -55,7 +55,7 @@ extern char sUartReceiveMessage[mUartRxBufferSize];
 extern const char* sEntryMessage;
 extern uint8_t cUartReceive;
 extern uint8_t iRxIndex;
-extern UART_HandleTypeDef huart4;
+extern UART_HandleTypeDef huart5;
 extern uint8_t currentCommand;
 
 
